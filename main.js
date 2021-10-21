@@ -1,18 +1,16 @@
-perdiction = "";
-
 Webcam.set({
-    width:350,
-    height:300,
+    width :350 , 
+    height :300,
     image_format : 'png',
-    png_quality:90
+    png_quality :90,
 });
 
-camera = document.getElementById('camera');
+camera = document.getElementById("camera");
 Webcam.attach('#camera');
  function take_snapshot()
  {
      Webcam.snap(function(data_uri){
-         document.getElementById('result').innerHTML= '<img id= "captured_image" scr="'+data_uri+'"/>';
+         document.getElementById("result").innerHTML= '<img id= "captured_image" src ="'+data_uri+'"/>';
 
      });
  }
@@ -25,8 +23,8 @@ Webcam.attach('#camera');
 
  function speak(){
      var synth = window.speechSynthesis;
-     speak_data_1 = 'the first prediction is'+ perdiction;
-     var utterThis = new SpeechSynthesisUtterance(speak_data_1);
+     speak_data = toSpeak;
+     var utterThis = new SpeechSynthesisUtterance(speak_data);
      synth.speak(utterThis);
  }
  function check(){
@@ -42,13 +40,13 @@ Webcam.attach('#camera');
          document.getElementById("result_emotion_name").innerHTML= results[0].label;
          perdiction1 =results[0].label;
         speak();
-        if(results[0].label=="happy"){
+        if(perdiction1=="Victory"){
      document.getElementById("update_emoji").innerHTML= "&#9996;";
     }
-    if(results[0].label=="sad"){
+    if(perdiction1=="super"){
         document.getElementById("update_emoji").innerHTML= "&#128076;";
        }
-       if(results[0].label=="angry"){
+       if(perdiction1=="thumbsup"){
         document.getElementById("update_emoji").innerHTML= "&#128077;";
        }
     }
