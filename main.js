@@ -21,12 +21,7 @@ Webcam.attach('#camera');
      console.log('Model Loaded!');
  }
 
- function speak(){
-     var synth = window.speechSynthesis;
-     speak_data = toSpeak;
-     var utterThis = new SpeechSynthesisUtterance(speak_data);
-     synth.speak(utterThis);
- }
+ 
  function check(){
      img = document.getElementById('captured_image');
      classifier.classify(img , gotResult)
@@ -39,15 +34,25 @@ Webcam.attach('#camera');
          console.log(results);
          document.getElementById("result_emotion_name").innerHTML= results[0].label;
          perdiction1 =results[0].label;
-        speak();
-        if(perdiction1=="Victory"){
+        toSpeak = "";
+         if(perdiction1=="Victory"){
      document.getElementById("update_emoji").innerHTML= "&#9996;";
+    toSpeak = "this is Victory";
     }
-    if(perdiction1=="super"){
+   else if(perdiction1=="super"){
         document.getElementById("update_emoji").innerHTML= "&#128076;";
-       }
-       if(perdiction1=="thumbsup"){
-        document.getElementById("update_emoji").innerHTML= "&#128077;";
-       }
+        toSpeak = "this is Super";   
     }
+     else if(perdiction1=="thumbsup"){
+        document.getElementById("update_emoji").innerHTML= "&#128077;";
+        toSpeak = "this is thumbsup";   
+    }
+    speak();
+    }
+}
+function speak(){
+    var synth = window.speechSynthesis;
+    speak_data = toSpeak;
+    var utterThis = new SpeechSynthesisUtterance(speak_data);
+    synth.speak(utterThis);
 }
